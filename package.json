@@ -2,10 +2,10 @@
   "name": "discord-soundboard-bot",
   "version": "1.0.0",
   "description": "Soundboard bot for Discord",
-  "main": "bot.js",
+  "main": "main.js",
   "repository": "https://github.com/brunofin/discord-soundboard-bot.git",
   "author": "Bruno Finger",
-  "license": "MIT",
+  "license": "GPL3",
   "dependencies": {
     "discord.io": "^2.5.1",
     "winston": "^2.3.1"
@@ -13,6 +13,6 @@
 
   "scripts": {
     "prestart": "yarn install",
-    "start": "node bot.js"
+    "start": "node main.js"
   }
 }
