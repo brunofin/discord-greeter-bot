@@ -1,8 +1,9 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var fs = require('fs');
-var settings = require('./settings.json');
+var userAuth = require('../auth.json');
 var path = require('path');
+var settings = require('../settings.json');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -11,7 +12,7 @@ logger.add(logger.transports.Console, {
 });
 logger.level = 'debug';
 
-var nodeModulesBinPath = __dirname
+var nodeModulesBinPath = path.join(__dirname, '..')
   .concat(path.sep)
   .concat('node_modules')
   .concat(path.sep)
@@ -27,39 +28,32 @@ if (!process.env.PATH.split(path.delimiter).includes(nodeModulesBinPath)) {
 
 // Initialize Discord Bot
 var bot = new Discord.Client({
-    token: settings.token,
+    token: userAuth.token,
     autorun: true
 });
 
-bot.on('ready', function (evt) {
-    logger.info('Connected');
-    logger.info('Logged in as: ');
-    logger.info(bot.username + ' - (' + bot.id + ')');
+var channelId: string = '373191844319854592';
+var audioPath: string = 'sounds/radioxurume.mp3';
 
-    bot.joinVoiceChannel('373191844319854592', function(error, events) {
+bot.on('ready', (evt) => {
+    logger.info('Logged in as: ' + bot.username + ' - (' + bot.id + ')');
+
+    bot.joinVoiceChannel(channelId, (error, events) => {
       if (!error) {
-        logger.info('Connected to Audio channel.')
-
-        bot.getAudioContext('373191844319854592', function(error, stream) {
+        bot.getAudioContext(channelId, (error, stream) => {
           if (!error) {
-            logger.info('Got Audio Context.')
-
-            setInterval(function() {
-              var fi = fs.createReadStream('sounds/radioxurume.mp3');
+            setInterval(() => {
+              var fi = fs.createReadStream(audioPath);
 
               logger.info('Playing audio...')
               fi.pipe(stream, {end: false});
 
-              stream.on('done', function() {
+              stream.on('done', () => {
                 fi.close();
               });
-            }, 10 * 60 * 1000);
-          } else {
-            logger.info(error);
+            }, settings.loopInterval);
           }
         });
-      } else {
-        logger.info(error);
       }
     });
 });

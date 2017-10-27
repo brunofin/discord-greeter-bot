@@ -7,13 +7,15 @@
   "author": "Bruno Finger",
   "license": "GPL3",
   "dependencies": {
+    "@types/node": "^8.0.47",
     "discord.io": "^2.5.1",
-    "winston": "^2.3.1",
-    "ffmpeg-binaries": "latest"
+    "ffmpeg-binaries": "latest",
+    "winston": "^2.3.1"
   },
-
   "scripts": {
-    "prestart": "yarn install",
-    "start": "node main.js"
+    "precompile": "yarn install",
+    "compile": "tsc",
+    "prestart": "yarn run compile",
+    "start": "node out/main.js"
   }
 }
