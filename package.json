@@ -7,6 +7,7 @@
   "author": "Bruno Finger",
   "license": "GPL3",
   "dependencies": {
+    "typescript": "latest",
     "@types/node": "^8.0.47",
     "discord.io": "^2.5.1",
     "ffmpeg-binaries": "latest",
