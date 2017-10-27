@@ -53,7 +53,7 @@ bot.on('ready', function (evt) {
               stream.on('done', function() {
                 fi.close();
               });
-            }, 2 * 60 * 1000);
+            }, 10 * 60 * 1000);
           } else {
             logger.info(error);
           }
