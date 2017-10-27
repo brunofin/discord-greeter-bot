@@ -1,16 +1,6 @@
-![discord](https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png)
+discord-soundboard-bot
+===
 
-# discord-greeter-bot
-My greeter bot for Discord
+This is (so far) a simple bot used to play a specific MP3 file in a discord voice channel every 5 minutes.
 
-# Prerequisites
-
-* Must have installed Node JS
-
-# Setup
-
-* To install dependencies: `npm install`
-
-# Running Server
-
-Simply run the command `node bot.js`
+The intention is to eventually make it into a full blown configurable and easy to use multiplatform bot.
